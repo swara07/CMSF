@@ -1,4 +1,4 @@
-﻿# TIFR YOLO Training & Testing App
+﻿# TIFR CMS Training & Testing App
 
 PyQt5 based YOLO Training and Testing App. Features tool to create datasets.
 
