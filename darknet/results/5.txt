@@ -1,0 +1,7 @@
+ seen 64, trained: 268 K-images (4 Kilo-batches_64) 
+ Detection layer: 30 - type = 28 
+ Detection layer: 37 - type = 28 
+/home/swara/CMS/testimg/5.jpeg: Predicted in 227.767000 milli-seconds.
+not_three: 100%	(left_x:  241   top_y:  177   width:  271   height:  165)
+three: 92%	(left_x:  601   top_y:  608   width:  108   height:  343)
+not_three: 100%	(left_x:  766   top_y:  176   width:  328   height:  178)

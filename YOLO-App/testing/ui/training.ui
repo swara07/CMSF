@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1231</width>
+    <height>662</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Training</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../tifr-logo.png</normaloff>../tifr-logo.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QTableWidget" name="trainingTable">
+      <property name="styleSheet">
+       <string notr="true">color: black;</string>
+      </property>
+      <property name="alternatingRowColors">
+       <bool>false</bool>
+      </property>
+      <column>
+       <property name="text">
+        <string>Name</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Start Date</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Start Time</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>End Date</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>End Time</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Hours Elapsed</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Process ID</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Status</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Created By</string>
+       </property>
+      </column>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1231</width>
+     <height>28</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

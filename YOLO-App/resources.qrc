@@ -1,0 +1,24 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+
+    <file alias="settings.png">icons/settings.png</file>
+    <file alias="exit.png">icons/exit.png</file>
+    <file alias="back.png">icons/back.png</file>
+
+    <file alias="new-training.png">icons/new-training.png</file>
+    <file alias="start-training.png">icons/start-training.png</file>
+    <file alias="cancel-training.png">icons/cancel-training.png</file>
+    <file alias="delete-training.png">icons/delete-training.png</file>
+    <file alias="help-training.png">icons/help-training.png</file>
+
+    <file alias="logout.png">icons/logout.png</file>
+
+    <file alias="green-check.png">icons/check.png</file>
+    
+</qresource>
+
+<qresource prefix="images">
+    <file>login.png</file>
+  </qresource>
+
+</RCC>
