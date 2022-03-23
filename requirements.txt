@@ -1,0 +1,13 @@
+autocorrect
+bcrypt
+lxml
+numpy
+opencv-python
+pandas
+psutil
+PyQt5
+PyQt5-Qt5
+PyQt5-sip
+python-dateutil
+qt-material
+qtwidgets
