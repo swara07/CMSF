@@ -1451,7 +1451,7 @@ class MainWindow(QMainWindow, WindowMixin):
             
             self.statusBar().showMessage("New Settings Saved", 10000)
             print(self.configPath+"ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ")
-            with open(self.configPath,'r') as firstfile, open(r"labelImg\data\predefined_classes.txt",'w') as secondfile:
+            with open(self.configPath,'r') as firstfile, open(r"labelImg/data/predefined_classes.txt",'w') as secondfile:
                 for line in firstfile:
                     secondfile.write(line)
             if self.label_hist is not None:
