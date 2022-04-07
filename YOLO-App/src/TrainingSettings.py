@@ -40,7 +40,7 @@ class TrainingSettings(QtWidgets.QDialog):
         self.weightFilePath = QtWidgets.QFileDialog.getOpenFileName(self, 
                                                                     'Select Weights',
                                                                     "", 
-                                                                    "Weight files (*.weights *.74 *.137)")[0]
+                                                                    "Weight files (*.weights *.74 *.29 *.137)")[0]
         # print(self.configurationFilePath)
         self.weightPathInput.setText(self.weightFilePath)
         
