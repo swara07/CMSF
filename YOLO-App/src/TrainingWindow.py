@@ -18,7 +18,7 @@ class TrainingWindow(QtWidgets.QMainWindow):
         
         
         #### RESTORE WINDOW DIMENSIONS ####
-        self.settings = QtCore.QSettings("TIFR", "GSR-App")
+        self.settings = QtCore.QSettings("TIFR", "CMS-App")
         geometry = self.settings.value('TestingWindowGeometry', bytes('', 'utf-8'))
         self.restoreGeometry(geometry)
         
