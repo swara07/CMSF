@@ -5,7 +5,7 @@ import sys, os
 
 from src.Settings import SettingsDialog
 from src.TrainingWindow import TrainingWindow
-# from src.TestingWindow import TestingWindow
+
 
 from labelImg.labelImg import MainWindow
 
@@ -23,56 +23,35 @@ class AppWindow(QtWidgets.QMainWindow):
         self.annotationIcon = QPixmap('icons/annotation_tool6.png.jpg')
         self.annotationIconLabel = self.findChild(QtWidgets.QLabel, 'annotationIcon')
         self.annotationIconLabel.setScaledContents(False)
-        self.annotationIconLabel.setPixmap(self.annotationIcon)
-        # self.annotationIconLabel.setSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed) 
+        self.annotationIconLabel.setPixmap(self.annotationIcon) 
         self.annotationIconLabel.setMinimumSize(1, 1)
-        # get resize events for the label
         self.annotationIconLabel.installEventFilter(self)
         
         self.trainingIcon = QPixmap('icons/training6.png')
         self.trainingIconLabel = self.findChild(QtWidgets.QLabel, 'trainingIcon')
         self.trainingIconLabel.setScaledContents(False)
         self.trainingIconLabel.setPixmap(self.trainingIcon)
-        # self.trainingIconLabel.setSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed) 
         self.trainingIconLabel.setMinimumSize(1, 1)
-        # get resize events for the label
         self.trainingIconLabel.installEventFilter(self)
         
-        # self.testingIcon = QPixmap('icons/testing.png')
-        # self.testingIconLabel = self.findChild(QtWidgets.QLabel, 'testingIcon')
-        # self.testingIconLabel.setScaledContents(False)
-        # self.testingIconLabel.setPixmap(self.testingIcon)
-        # # self.testingIconLabel.setSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed) 
-        # self.testingIconLabel.setMinimumSize(1, 1)
-        # # get resize events for the label
-        # self.testingIconLabel.installEventFilter(self)
         
         self.launchAnnotation.clicked.connect(self.launchAnnotationTool)
         self.launchTraining.clicked.connect(self.trainingWindow)
-        # self.launchTesting.clicked.connect(self.testingWindow)
-        
         self._createActions()
         self._connectActions()
         self._createMenuBar()
         
     def eventFilter(self, source, event):
         if (source is self.annotationIconLabel and event.type() == QtCore.QEvent.Resize):
-        # re-scale the pixmap when the label resizes
             self.annotationIconLabel.setPixmap(self.annotationIcon.scaled(
             self.annotationIconLabel.size(), QtCore.Qt.KeepAspectRatio,
             QtCore.Qt.SmoothTransformation))
             
         elif (source is self.trainingIconLabel and event.type() == QtCore.QEvent.Resize):
-        # re-scale the pixmap when the label resizes
             self.trainingIconLabel.setPixmap(self.trainingIcon.scaled(
             self.trainingIconLabel.size(), QtCore.Qt.KeepAspectRatio,
             QtCore.Qt.SmoothTransformation))
             
-        # elif (source is self.testingIconLabel and event.type() == QtCore.QEvent.Resize):
-        # # re-scale the pixmap when the label resizes
-        #     self.testingIconLabel.setPixmap(self.testingIcon.scaled(
-        #     self.testingIconLabel.size(), QtCore.Qt.KeepAspectRatio,
-        #     QtCore.Qt.SmoothTransformation))
             
         return super(AppWindow, self).eventFilter(source, event)
         
@@ -87,20 +66,14 @@ class AppWindow(QtWidgets.QMainWindow):
         training = TrainingWindow(self)
         training.show()
         
-    # def testingWindow(self):        
-    #     self.hide()
-    #     testing = TestingWindow(self)
-    #     testing.show()
         
     def _createActions(self):
-        # Creating actions using the second constructor
         self.settingsAction = QtWidgets.QAction(QIcon(":settings.png"), "&Settings", self)
         self.logoutAction = QtWidgets.QAction(QIcon(":logout.png"), "&Logout", self)
         self.exitAction = QtWidgets.QAction(QIcon(":exit.png"), "&Exit", self)
         self.helpContentAction = QtWidgets.QAction("&Help", self)
         
     def _connectActions(self):
-        # Connecting actions
         self.settingsAction.triggered.connect(self.launchSettingsPanel)
         
         self.logoutAction.triggered.connect(self.logout)
@@ -131,9 +104,9 @@ class AppWindow(QtWidgets.QMainWindow):
         """
         
         menuBar = self.menuBar()
-        # menuBar.setStyleSheet(stylesheet)
+        
         fileMenu =  menuBar.addMenu("&File")
-        # fileMenu.addAction(self.settingsAction)
+        
         fileMenu.addAction(self.logoutAction)
         fileMenu.addAction(self.exitAction)
         
@@ -159,7 +132,5 @@ class AppWindow(QtWidgets.QMainWindow):
         
     def launchSettingsPanel(self):
         settingsDialog = SettingsDialog(self)
-        # apply_stylesheet(register_page, theme='dark_lightgreen.xml')
-        # settingsDialog.setFixedSize(int(self.frameGeometry().height()* 0.4), int(self.frameGeometry().width() * 0.8))
         settingsDialog.setWindowModality(QtCore.Qt.ApplicationModal)
         settingsDialog.show()
