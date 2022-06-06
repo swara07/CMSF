@@ -28,41 +28,7 @@ from PyQt5.QtCore import *
 import sys
 
 from PyQt5.QtGui import QDrag
-# class QtImageViewer(QGraphicsView):
-#     leftMouseButtonPressed = pyqtSignal(float, float)
-#     rightMouseButtonPressed = pyqtSignal(float, float)
-#     leftMouseButtonReleased = pyqtSignal(float, float)
-#     rightMouseButtonReleased = pyqtSignal(float, float)
-#     leftMouseButtonDoubleClicked = pyqtSignal(float, float)
-#     rightMouseButtonDoubleClicked = pyqtSignal(float, float)
-#     def __init__(self):
-#         QGraphicsView.__init__(self)
-#         self.scene = QGraphicsScene()
-#         self.setScene(self.scene)
 
-#         # Store a local handle to the scene's current image pixmap.
-#         self._pixmapHandle = None
-
-#         # Image aspect ratio mode.
-#         # !!! ONLY applies to full image. Aspect ratio is always ignored when zooming.
-#         #   Qt.IgnoreAspectRatio: Scale image to fit viewport.
-#         #   Qt.KeepAspectRatio: Scale image to fit inside viewport, preserving aspect ratio.
-#         #   Qt.KeepAspectRatioByExpanding: Scale image to fill the viewport, preserving aspect ratio.
-#         self.aspectRatioMode = Qt.KeepAspectRatio
-
-#         # Scroll bar behaviour.
-#         #   Qt.ScrollBarAlwaysOff: Never shows a scroll bar.
-#         #   Qt.ScrollBarAlwaysOn: Always shows a scroll bar.
-#         #   Qt.ScrollBarAsNeeded: Shows a scroll bar only when zoomed.
-#         self.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
-#         self.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
-
-#         # Stack of QRectF zoom boxes in scene coordinates.
-#         self.zoomStack = []
-
-#         # Flags for enabling/disabling mouse interaction.
-#         self.canZoom = True
-#         self.canPan = True
 class Ui_MainWindow(QtWidgets.QMainWindow , QGraphicsView):
     factor = 1.5
     filename=''
@@ -72,27 +38,12 @@ class Ui_MainWindow(QtWidgets.QMainWindow , QGraphicsView):
     pixmap=''
     photoClicked = QtCore.pyqtSignal(QtCore.QPoint)
     leftMouseButtonPressed = pyqtSignal(float, float)
-#     rightMouseButtonPressed = pyqtSignal(float, float)
+
     leftMouseButtonReleased = pyqtSignal(float, float)
     def __init__(self, parent=None):
-        # print('Using Qt ')
 
-        # def handleLeftClick(x, y):
-        #     row = int(y)
-        #     column = int(x)
-        #     print("Clicked on image pixel (row="+str(row)+", column="+str(column)+")")
-        # # viewer = Ui_MainWindow()
-        # viewer.leftMouseButtonPressed.connect(handleLeftClick)
         super(Ui_MainWindow, self).__init__(parent)
         
-        # QGraphicsView.__init__(self)
-        # self.scene = QGraphicsScene()
-        # self.setScene(self.scene)
-        # self._pixmapHandle = None
-        # self.aspectRatioMode = Qt.KeepAspectRatio
-        # self.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
-        # self.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
-        # self.zoomStack = []
         self.canZoom = True
         self.canPan = True
 
@@ -104,23 +55,8 @@ class Ui_MainWindow(QtWidgets.QMainWindow , QGraphicsView):
         MainWindow.resize(1605, 916)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        # self.opendir = QtWidgets.QPushButton(self.centralwidget)
-        # self.opendir.setGeometry(QtCore.QRect(40, 130, 151, 151))
-        # self.opendir.setObjectName("opendir")
-        # self.opendir.setStyleSheet("color: white;border-style: none;border-width: none;border-radius: 0px;border-color: black;font:bold 14px;min-width: 7em;padding: 6px;background-color: grey;")
         self.scale = 1
-        # self.loadimage = QtWidgets.QPushButton(self.centralwidget)
-        # self.loadimage.setGeometry(QtCore.QRect(40, 140, 151, 51))
-        # self.loadimage.setObjectName("loadimage")
-        # self.savedir = QtWidgets.QPushButton(self.centralwidget)
-        # self.savedir.setGeometry(QtCore.QRect(40, 200, 151, 51))
-        # self.savedir.setObjectName("savedir")
-        # self.save = QtWidgets.QPushButton(self.centralwidget)
-        # self.save.setGeometry(QtCore.QRect(40, 240, 151, 51))
-        # self.save.setObjectName("save")
-        # self.predict = QtWidgets.QPushButton(self.centralwidget)
-        # self.predict.setGeometry(QtCore.QRect(40, 340, 151, 51))
-        # self.predict.setObjectName("predict")
+
         self.predictall = QtWidgets.QPushButton(self.centralwidget)
         self.predictall.setGeometry(QtCore.QRect(40, 380, 151, 51))
         self.predictall.setObjectName("predictall")
@@ -137,29 +73,15 @@ class Ui_MainWindow(QtWidgets.QMainWindow , QGraphicsView):
         self.preimage = QtWidgets.QPushButton(self.centralwidget)
         self.preimage.setGeometry(QtCore.QRect(40, 180, 151, 51))
         self.preimage.setObjectName("preimage")
-        # self.config = QtWidgets.QPushButton(self.centralwidget)
-        # self.config.setGeometry(QtCore.QRect(40, 30, 151, 51))
-        # self.config.setObjectName("config")
+
         self.Zoomin = QtWidgets.QPushButton(self.centralwidget)
         self.Zoomin.setGeometry(QtCore.QRect(40, 480, 151, 51))
         self.Zoomin.setObjectName("Zoom In")
         self.Zoomout = QtWidgets.QPushButton(self.centralwidget)
         self.Zoomout.setGeometry(QtCore.QRect(40, 580, 151, 51))
         self.Zoomout.setObjectName("Zoom Out")
-        # self.back = QtWidgets.QPushButton(self.centralwidget)
-        # self.back.setGeometry(QtCore.QRect(40, 730, 151, 51))
-        # self.back.setObjectName("back")
-        # self.back_Action = QtWidgets.QPushButton(self.centralwidget)
-        # self.back_Action.setGeometry(QtCore.QRect(40, 530, 151, 51))
-        # self.back_Action.setObjectName("back_Action")
-        # self.help = QtWidgets.QPushButton(self.centralwidget)
-        # self.help.setGeometry(QtCore.QRect(40, 630, 151, 51))
-        # self.help.setObjectName("Help")
         MainWindow.setCentralWidget(self.centralwidget)
-        # self.menubar = QtWidgets.QMenuBar(MainWindow)
-        # self.menubar.setGeometry(QtCore.QRect(0, 0, 1605, 20))
-        # self.menubar.setObjectName("menubar")
-        # MainWindow.setMenuBar(self.menubar)
+
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
         self.menubar.setObjectName("menubar")
@@ -253,9 +175,6 @@ class Ui_MainWindow(QtWidgets.QMainWindow , QGraphicsView):
         self.Zoomout.setIconSize(QSize(40,40))
         self.predictall.setIcon(QIcon('./icons/predict.png'))
         self.predictall.setIconSize(QSize(40,40))
-        # self.back_Action.setStyleSheet("color: white;border-style: none;border-width: none;border-radius: 0px;border-color: black;font:bold 14px;min-width: 7em;padding: 6px;background-color: grey;")
-        # self.help.setStyleSheet("color: white;border-style: none;border-width: none;border-radius: 0px;border-color: black;font:bold 14px;min-width: 7em;padding: 6px;background-color: grey;")
-        # self.back.setStyleSheet("color: white;border-style: none;border-width: none;border-radius: 0px;border-color: black;font:bold 14px;min-width: 7em;padding: 6px;background-color: grey;")
         self.nextimage.setStyleSheet("color: white;border-style: none;border-width: none;border-radius: 0px;border-color: black;font:bold 14px;min-width: 7em;padding: 6px;background-color: grey;")
 
     
@@ -263,9 +182,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow , QGraphicsView):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", " Automated Visual Inspection"))
-        # self.opendir.setText(_translate("MainWindow", "Open Dir"))
-                # MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        # self.label.setText(_translate("MainWindow", "TextLabel"))
+
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.menuEdit.setTitle(_translate("MainWindow", "Edit"))
         self.menuHelp.setTitle(_translate("MainWindow", "Help"))
@@ -282,10 +199,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow , QGraphicsView):
         self.exit.setText(_translate("MainWindow", "Quit"))
         self.exit.setShortcut(_translate("MainWindow", "Ctrl+Q"))
        
-        # self.loadimage.setText(_translate("MainWindow", "LOAD IMAGE"))
-        # self.savedir.setText(_translate("MainWindow", "SAVE DIR"))
-        # self.save.setText(_translate("MainWindow", "SAVE IMAGE"))
-        # self.predict.setText(_translate("MainWindow", "PREDICT"))
+
         self.predictall.setText(_translate("MainWindow", "  PREDICT"))
         self.nextimage.setText(_translate("MainWindow", "    Next"))
         self.preimage.setText(_translate("MainWindow", "Previous"))
@@ -293,28 +207,16 @@ class Ui_MainWindow(QtWidgets.QMainWindow , QGraphicsView):
         self.Zoomin.setText(_translate("MainWindow", "  Zoom In "))
         self.Zoomout.setText(_translate("MainWindow", "  Zoom Out "))
 
-        # self.Logout.setText(_translate("MainWindow", "Logout "))
-        # self.back.setText(_translate("MainWindow", "Quit "))
-
-        # self.back_Action.setText(_translate("MainWindow", "Back"))
-        # self.help.setText(_translate("MainWindow", "Help"))
-
         
-
-        # self.opendir.setIcon(QIcon('vesit.png'))
     def mousePressEvent(self, event):
         """ Start mouse pan or zoom mode.
         """
-        print('amirt')
+
         scenePos = self.mapToScene(event.pos())
         if event.button() == Qt.LeftButton:
             if self.canPan:
                 self.setDragMode(QGraphicsView.ScrollHandDrag)
             self.leftMouseButtonPressed.emit(scenePos.x(), scenePos.y())
-        # elif event.button() == Qt.RightButton:
-        #     if self.canZoom:
-        #         self.setDragMode(QGraphicsView.RubberBandDrag)
-        #     self.rightMouseButtonPressed.emit(scenePos.x(), scenePos.y())
         QGraphicsView.mousePressEvent(self, event)
     
     def load_image(self):
@@ -344,30 +246,12 @@ class Ui_MainWindow(QtWidgets.QMainWindow , QGraphicsView):
     def clicked(self, text):
         self.label.setText(text)
         self.label.adjustSize()
-    
-    # def zoomin(self):
-    #     c = 0
-    #     if(c == 0):
-    #         c = c + 1
-    #         print(c)
-    #     else:
-    #         c = c + 1
-    #         print(c)
-    
-    # def mousePressEvent(self, QMouseEvent):
-    #     print('amimaa')
-    #     if self.image.isUnderMouse():
-    #         self.photoClicked.emit(self.mapToScene(QMouseEvent.pos()).toPoint())
-    #         print('amimaa')
-    #     super(Ui_MainWindow, self).mousePressEvent(QMouseEvent)
+
 
     def zoomin(self, event):
         self.scale *= 1.2
         self.resize_image()
-        # if event.button() == Qt.LeftButton:
-        #     if self.canPan:
-        #         self.setDragMode(QGraphicsView.ScrollHandDrag)
-        #     self.leftMouseButtonPressed.emit(scenePos.x(), scenePos.y())
+
     def zoomout(self, event):
         self.scale /= 1.2
         self.resize_image()  
@@ -377,19 +261,6 @@ class Ui_MainWindow(QtWidgets.QMainWindow , QGraphicsView):
         size = pixmap.size()
         scaled_pixmap = pixmap.scaled(self.scale* size)
         self.image.setPixmap(scaled_pixmap)
-        # global filename
-        # img1=cv2.imread(filename)
-        # # img1=cv2.putText(img1,textcv,(10,50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
-        # # self.tmp=main_image
-        # frame=cv2.cvtColor(img1,cv2.COLOR_BGR2RGB)
-        # image=QImage(frame,frame.shape[1],frame.shape[0],frame.strides[0],QImage.Format_RGB888)
-        # # if filename:
-        # mgnwidth = 1000
-        # mgnHeight = 500
-        # size = QSize(mgnwidth, mgnHeight)
-        # pixmap = QtGui.QPixmap(image).scaled(size, QtCore.Qt.KeepAspectRatio)
-        # # self.image.setGeometry(QtCore.QRect(230, 10, 1131, 881))
-        # print("hiiiiiiiiiiiiiiiii")
 
         
         
@@ -398,7 +269,6 @@ class Ui_MainWindow(QtWidgets.QMainWindow , QGraphicsView):
         global main_image
         global pixmap
         textcv=os.path.basename(filename)
-        print("text on file----------------"+textcv)
         main_image=cv2.imread(filename)
         main_image=cv2.putText(main_image,textcv,(10,50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
         self.tmp=main_image
@@ -411,7 +281,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow , QGraphicsView):
                 return
             self.image.setPixmap(pixmap)
     def Close(self):
-        print(self)
+        #print(self)
         self.MainWindow.close()
     def backButton_Action(self):
         """
@@ -421,7 +291,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow , QGraphicsView):
         Returns: None
         """
         buttonReply = QMessageBox.question(self, 'PyQt5 message', "Do you want to Logout?", QMessageBox.Yes | QMessageBox.No,QMessageBox.No )
-        print(int(buttonReply))
+        #print(int(buttonReply))
         if buttonReply == QMessageBox.Yes:
             from main import LoginWindow
             self.main = LoginWindow()
@@ -462,45 +332,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow , QGraphicsView):
             sys.exit()
         if buttonReply == QMessageBox.No:
             print('No clicked.')
-        # if buttonReply == QMessageBox.Cancel:
-        #     print('Cancel')
-        # d = QDialog()
-        # b1 = QPushButton("ok",d)
-        # b1.move(50,50)
-        # d.setWindowTitle("Dialog")
-        # d.setWindowModality(Qt.ApplicationModal)
-        # d.exec_()
-        # text,ok =QInputDialog.getText(self, "enter","hjha")
-        # print(text)
-        # print(ok)
-        # if ok:
-        #     QCoreApplication.instance().quit
-        # print('ypoooooooooooooooo')
-        # self.quit()
 
-        # self.parentWidget().show()
-    # def next_image(self):
-    #     global filename
-    #     print(self.fileList,"asasa")
-    #     # fileList = reversed(self.fileList)
-    #     if self.fileList:
-    #         try:
-    #             print(self.dirIterator)
-    #             filename = next(self.dirIterator)
-    #             print(filename,"inside next")
-    #             pixmap = QtGui.QPixmap(filename).scaled(self.image.size(), 
-    #                 QtCore.Qt.KeepAspectRatio)
-    #             if pixmap.isNull():
-    #                 print("gvygj")
-    #                 self.fileList.remove(filename)
-    #                 self.next_image()
-    #             else:
-    #                 self.load_imagetext()
-    #         except:
-    #             self.dirIterator = iter(self.fileList)
-    #             self.next_image()
-    #     else:
-    #         self.load_image()
 
     def next_image(self):
         global filename
@@ -528,26 +360,6 @@ class Ui_MainWindow(QtWidgets.QMainWindow , QGraphicsView):
         filename = self.fileList[self.currentIndex]
         self.load_imagetext()
     
-    # def pre_image(self):
-    #     global filename
-    #     # print(self.fileList,"asasa")
-    #     if self.fileList:
-    #         try:
-    #             filename = next(self.dirIterator)
-    #             # print(filename,"inside next")
-    #             pixmap = QtGui.QPixmap(filename).scaled(self.image.size(), 
-    #                 QtCore.Qt.KeepAspectRatio)
-    #             if pixmap.isNull():
-    #                 # print("gvygj")
-    #                 self.fileList.remove(filename)
-    #                 self.next_image()
-    #             else:
-    #                 self.load_imagetext()
-    #         except:
-    #             self.dirIterator = iter(self.fileList)
-    #             self.next_image()
-    #     else:
-    #         self.load_image()
 
 
     def save_image(self):
@@ -557,7 +369,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow , QGraphicsView):
         print(filename)
         splitted_filename = filename.split("\\")
 
-        print(splitted_filename)
+        # print(splitted_filename)
         
         result_dir=''
         for i in range(len(splitted_filename)-1):
@@ -591,7 +403,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow , QGraphicsView):
             return
 
 
-        print("opening dir -----------:"+opening_dir)
+        # print("opening dir -----------:"+opening_dir)
         self.fileList = []
         for f in os.listdir(opening_dir):
             fpath = os.path.join(opening_dir, f)
@@ -616,7 +428,6 @@ class Ui_MainWindow(QtWidgets.QMainWindow , QGraphicsView):
         print("\n calling ", train_cmd_str,"\n")
         subprocess.call(train_cmd_str,shell=True)
         imgDetect = 'predictions.jpg' #pass prediction.jpg
-        print(filename+"tttttttttttttt")
         print(imgDetect)
 
         main_image=cv2.imread(imgDetect)
@@ -663,7 +474,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow , QGraphicsView):
             self.settings.setValue("inferenceConfig", self.configPath)
             self.settings.setValue("inferenceWeights", self.weightPath)
             self.settings.setValue("inferenceData", self.dataPath)
-            print(self.darknetPath,'9999999999')
+            
             self.statusBar().showMessage("New Settings Saved", 10000)
             
         else:
@@ -672,14 +483,14 @@ class Ui_MainWindow(QtWidgets.QMainWindow , QGraphicsView):
     def predict_all(self):
         global opening_dir
         global filename
-        print("IN PREDICT ALL FUNCTION")
+        
         test_Path = opening_dir
         print(test_Path)
         d=0
         f_name =[]
         values = InferenceSettings.getValuetry(self)
-        print(values[0],"hooooooooooooooooooooooooooooo")
-        # print(prevDir)
+        
+        
         prevDir = os.getcwd()
         print(prevDir)
         os.chdir(values[0])
@@ -689,52 +500,48 @@ class Ui_MainWindow(QtWidgets.QMainWindow , QGraphicsView):
                 pref ='chmod +x ' + values[0]
                 subprocess.call(pref,shell=True)
                 img_path= filename.split("/")
-                print(img_path,"sddddddddddddddddddd")
                 img = images.split(".")
                 # commands = " ./darknet  detector test" + ' ' + values[3] + ' ' + values[1]+ ' ' + values[2] + ' ' + opening_dir + "/" + images + " -thresh 0.5 -dont_show"
                 commands = './darknet detector test '+ values[3]+' ' + values[1]+ ' ' + values[2] + ' ' + opening_dir + "/" + images +  ' -thresh 0.5 -dont_show -ext_output < '+ opening_dir + "/" + images+' > results/'+img[0]+'.txt '
-                print('done')
+                
                 textFileName = 'results/'+img[0]+'.txt'
                 
-                print(commands)
+                
                 os.system(commands)
                 a_file = open(textFileName, "r")
                 lines = a_file.readlines()
                 a_file.close()
                 del lines[:8]
                 new_file = open(textFileName, "w+")
-                print(lines)
-                print("========================================")
+                
+                
                 for line in lines:
-                    print("helllllllloooooooo")
-                    print(line)
+                    
                     new_file.write(line)
                 new_file.close()
-                print(filename,"gggggggggggggggggg")
-                # image_path = "/content/gdrive/MyDrive/test3/predictions_%d.jpg"%d
-                # print(image_path, " ---------------------------------------")
-                print(images,"rashmiiiiiiiiiiiiiiiiiiiiiiiii")
+                
+                
                 main_image_1=cv2.imread('predictions.jpg')
                 main_image_1=cv2.putText(main_image_1,img[0] + ".jpg",(10,50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
                 shutil.copy('predictions.jpg',  "results/"+ img[0] +".jpg")
                 f_name.append( values[0]+"/results/" + img[0] + ".jpg")
-                print("done")
+                
 
         self.fileList = []
         for f in os.listdir( values[0] + "/results/"):
             fpath = os.path.join(opening_dir, f)
-            print(fpath,"amit")
+            
             if f.endswith(('.png', '.jpg', '.jpeg','.bmp')):
                 self.fileList.append(fpath)
         self.fileList.sort()
         self.dirIterator = iter(self.fileList)
-        print(self.fileList)
+        
         filename=self.fileList[0]
         predfile = filename.split('/')[-1]
         imgDetect = "results/"+predfile  #pass prediction.jpg
         filename = values[0] + "/" + imgDetect
 	
-        print(filename)
+        
 
         main_image=cv2.imread(imgDetect)
         #main_image=cv2.putText(main_image,textcv,(10,50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
@@ -746,7 +553,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow , QGraphicsView):
         image=QImage(frame,frame.shape[1],frame.shape[0],frame.strides[0],QImage.Format_RGB888)
     
         if imgDetect:
-            print(predfile,"gbjhkuhjbjhnnkhn")
+            
             
             pixmap = QtGui.QPixmap(image).scaled(self.image.size(), 
                     QtCore.Qt.KeepAspectRatio)
@@ -756,32 +563,15 @@ class Ui_MainWindow(QtWidgets.QMainWindow , QGraphicsView):
         main_image_1=cv2.imread('predictions.jpg')
         main_image_1=cv2.putText(main_image_1,img[0] + ".jpg",(10,50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
         self.fileList = f_name[:]
-        #for f in os.listdir( "/home/root1/cms/darknet/results/"):
-            #fpath = os.path.join()
-           # print(fpath,"amit")
-          #  if f.endswith(('.png', '.jpg', '.jpeg','.bmp')):
-         #       self.fileList.append(fpath)
-        #print(self.fileList, "predict")
         os.chdir(prevDir)
 
 
-            
-            
-
-   
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
-    print('Using Qt ')
-    # def handleLeftClick(x, y):
-    #     row = int(y)
-    #     column = int(x)
-    #     print("Clicked on image pixel (row="+str(row)+", column="+str(column)+")")
-    # viewer = QtImageViewer()
-    # viewer.leftMouseButtonPressed.connect(handleLeftClick)
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
