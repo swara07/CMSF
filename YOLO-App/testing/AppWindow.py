@@ -78,7 +78,7 @@ class AppWindow(QtWidgets.QMainWindow):
         
     def launchAnnotationTool(self):
         classFile = os.path.join(os.path.dirname(__file__), "labelImg/data", "predefined_classes.txt")
-        print(classFile)
+        #print(classFile)
         win = MainWindow(default_prefdef_class_file=classFile, parent = self)
         win.show()
     
