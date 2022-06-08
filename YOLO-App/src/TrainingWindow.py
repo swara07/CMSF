@@ -3,7 +3,7 @@ from PyQt5.QtGui import QIcon
 import os, subprocess
 import time, datetime, signal
 import platform, psutil, dateutil
-
+from dateutil import relativedelta
 from src.TrainingSettings import TrainingSettings
 
 class AlignDelegate(QtWidgets.QStyledItemDelegate):
@@ -169,7 +169,7 @@ class TrainingWindow(QtWidgets.QMainWindow):
         self.backAction = QtWidgets.QAction(QIcon(":back.png"), "Back", self)
         self.newTrainingAction = QtWidgets.QAction( "New Training", self)
         self.startTrainingAction = QtWidgets.QAction( "Start Training", self)
-        # self.cancelTrainingAction = QtWidgets.QAction("Cancel Training", self)
+        self.cancelTrainingAction = QtWidgets.QAction("Cancel Training", self)
         self.deleteTrainingAction = QtWidgets.QAction( "Delete Training", self)
         # self.trainingHelpAction = QtWidgets.QAction("Help", self)
        
@@ -190,7 +190,7 @@ class TrainingWindow(QtWidgets.QMainWindow):
         fileToolBar.addSeparator()
         fileToolBar.addAction(self.newTrainingAction)
         fileToolBar.addAction(self.startTrainingAction)
-        # fileToolBar.addAction(self.cancelTrainingAction)
+        fileToolBar.addAction(self.cancelTrainingAction)
         fileToolBar.addAction(self.deleteTrainingAction)
         # fileToolBar.addAction(self.trainingHelpAction)
         
@@ -198,7 +198,7 @@ class TrainingWindow(QtWidgets.QMainWindow):
         self.backAction.triggered.connect(self.backButton)
         self.newTrainingAction.triggered.connect(self.newTraining)
         self.startTrainingAction.triggered.connect(self.startTraining)
-        # self.cancelTrainingAction.triggered.connect(self.cancelTraining)
+        self.cancelTrainingAction.triggered.connect(self.cancelTraining)
         self.deleteTrainingAction.triggered.connect(self.deleteTraining)
         
     def _createStatusBar(self):
@@ -290,7 +290,7 @@ class TrainingWindow(QtWidgets.QMainWindow):
                 data['endTime'] = convertedEndTime
                 
                 # Calculate hours difference between startDT and endDT
-                hours = dateutil.relativedelta.relativedelta(datetime.datetime.fromtimestamp(endDT),\
+                hours = relativedelta.relativedelta(datetime.datetime.fromtimestamp(endDT),\
                     datetime.datetime.fromtimestamp(startDT))
                 data['hours'] = "{}:{}".format(hours.hours, hours.minutes)
             
@@ -570,7 +570,6 @@ class TrainingWindow(QtWidgets.QMainWindow):
                 
                 # Get process ID and status of training
                 pid, status = self._getProcessDetails(training_name)
-                
                 # If running
                 if status == 1:
                     os.kill(pid, signal.SIGTERM) # Terminate
@@ -608,8 +607,9 @@ class TrainingWindow(QtWidgets.QMainWindow):
                 # Delete row from database table and QTableWidget
                 pid, status = self._getProcessDetails(training_name)
                 if self._deleteTableData(training_name):
-
-                    os.kill(pid, signal.SIGTERM)
+                    if (pid != '--'):
+                        os.kill(pid, signal.SIGTERM)
+                        
                     self.trainingTable.removeRow(row)
                     self.statusbar.showMessage("Deleted Training", 5000)
                     print("Successfully Deleted")
